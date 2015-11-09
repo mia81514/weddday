@@ -6,10 +6,11 @@
 
 # Ignore bundler config.
 /.bundle
-
+.DS_Store
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
+/config/database.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -23,7 +24,6 @@ capybara-*.html
 /tmp
 /db/*.sqlite3
 /db/*.sqlite3-journal
-/config/database.yml
 /public/system
 /coverage/
 /spec/tmp
