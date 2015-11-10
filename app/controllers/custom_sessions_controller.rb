@@ -17,14 +17,7 @@ class CustomSessionsController < Devise::SessionsController
   end
   
   def new
-    loginkey = cookies[:guideu]
-    if loginkey != nil
-      # user_obj = CacheManager.get_current_user(loginkey)
-      # if user_obj!= nil
-        # sign_in(user_obj) #devise helpers
-        # redirect_to '/'
-      # end
-    end
+
   end
   
 end
