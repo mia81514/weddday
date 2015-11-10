@@ -48,3 +48,6 @@ end
 
 
 gem 'devise'
+gem 'omniauth-facebook'
+gem 'settingslogic'
+gem 'rolify'

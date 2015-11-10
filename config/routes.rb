@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :skip => [:sessions,:registrations],
+             :controllers => {
+               :sessions => "custom_sessions",
+               :registrations => "registrations",
+               :omniauth_callbacks => "omniauth_callbacks"
+             }
+
+  devise_scope :user do
+    get 'sign_out'  ,:to => 'devise/sessions#destroy'     ,:as => :destroy_user_session
+    get '/login'    ,:to => 'devise/sessions#new'         ,:as => :new_user_session
+    get '/sign_up'  ,:to => 'devise/registrations#new'    ,:as => :new_user_registration
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -54,4 +66,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  root :to => 'welcome#index'
 end
