@@ -1,0 +1,14 @@
+defaults: &defaults
+  facebook_app_id: "350168381849624"
+  facebook_secret: "751b3c182e5b453864c8bde6c2b76364"
+  gcm_app_key: "AIzaSyAw0MIPt5dZQLOJ3GItIpuQ12F2CYQ7C4w"
+
+  mailer:
+    username: "postmaster@hairhub.tw"
+    password: "b765a1b4b743d1a1ec224665a995cf4b"
+
+development:
+  <<: *defaults
+
+production:
+  <<: *defaults
