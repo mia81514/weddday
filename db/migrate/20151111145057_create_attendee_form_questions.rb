@@ -8,5 +8,7 @@ class CreateAttendeeFormQuestions < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_index(:attendee_form_questions, [ :attendee_form_id, :q_type ])
   end
 end

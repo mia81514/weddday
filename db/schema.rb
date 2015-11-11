@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20151111152627) do
     t.datetime "updated_at",                     null: false
   end
 
+  add_index "attendee_form_questions", ["attendee_form_id", "q_type"], name: "index_attendee_form_questions_on_attendee_form_id_and_q_type", using: :btree
+
   create_table "attendee_forms", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
     t.string   "cowork_code",  limit: 255
@@ -47,6 +49,8 @@ ActiveRecord::Schema.define(version: 20151111152627) do
 
   create_table "guest_replies", force: :cascade do |t|
     t.integer  "attendee_form_id",   limit: 4
+    t.string   "name",               limit: 255
+    t.string   "phone",              limit: 255
     t.boolean  "is_attend"
     t.boolean  "is_need_invitation"
     t.integer  "guest_group_id",     limit: 4
@@ -61,6 +65,10 @@ ActiveRecord::Schema.define(version: 20151111152627) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
   end
+
+  add_index "guest_replies", ["attendee_form_id", "guest_group_id"], name: "index_guest_replies_on_attendee_form_id_and_guest_group_id", using: :btree
+  add_index "guest_replies", ["attendee_form_id", "is_attend"], name: "index_guest_replies_on_attendee_form_id_and_is_attend", using: :btree
+  add_index "guest_replies", ["attendee_form_id", "is_need_invitation"], name: "index_guest_replies_on_attendee_form_id_and_is_need_invitation", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255

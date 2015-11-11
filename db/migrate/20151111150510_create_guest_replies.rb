@@ -2,6 +2,8 @@ class CreateGuestReplies < ActiveRecord::Migration
   def change
     create_table :guest_replies do |t|
       t.integer :attendee_form_id
+      t.string  :name
+      t.string  :phone
       t.boolean :is_attend
       t.boolean :is_need_invitation
       t.integer :guest_group_id  #分類賓客EX: 女方國小同學
@@ -16,5 +18,9 @@ class CreateGuestReplies < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_index(:guest_replies, [ :attendee_form_id, :is_attend ])
+    add_index(:guest_replies, [ :attendee_form_id, :is_need_invitation ])
+    add_index(:guest_replies, [ :attendee_form_id, :guest_group_id ])
   end
 end
