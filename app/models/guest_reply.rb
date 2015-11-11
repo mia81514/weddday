@@ -4,6 +4,7 @@ class GuestReply < ActiveRecord::Base
 
   def as_json(options={})
     if options.fetch(:info_list, false)
+      hash = {}
       hash[:name]         = self.name
       hash[:phone]        = self.phone
       hash[:full_address] = self.zip_code + self.city + self.district + self.address
