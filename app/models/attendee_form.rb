@@ -15,11 +15,11 @@ class AttendeeForm < ActiveRecord::Base
 
   #女方親友
   def bride_friends
-    return guest_replies.includes(:guest_group).where("guest_group.is_bride=?",true)
+    return guest_replies.includes(:guest_group).select{|reply| reply.guest_group.is_bride}
   end
 
   #男方親友
   def bridegroom_friends
-    return guest_replies.includes(:guest_group).where("guest_group.is_bride=?",false)
+    return guest_replies.includes(:guest_group).select{|reply| not reply.guest_group.is_bride}
   end
 end
