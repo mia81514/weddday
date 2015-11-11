@@ -11,7 +11,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151110160045) do
+ActiveRecord::Schema.define(version: 20151111152627) do
+
+  create_table "attendee_form_questions", force: :cascade do |t|
+    t.integer  "attendee_form_id", limit: 4
+    t.integer  "q_type",           limit: 4
+    t.string   "title",            limit: 255
+    t.text     "selections",       limit: 65535
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  create_table "attendee_forms", force: :cascade do |t|
+    t.integer  "user_id",      limit: 4
+    t.string   "cowork_code",  limit: 255
+    t.string   "title",        limit: 255
+    t.string   "city",         limit: 255
+    t.string   "district",     limit: 255
+    t.string   "address",      limit: 255
+    t.string   "place_name",   limit: 255
+    t.datetime "wedding_date"
+    t.datetime "fill_start"
+    t.datetime "fill_end"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "guest_groups", force: :cascade do |t|
+    t.integer  "attendee_form_id", limit: 4
+    t.string   "name",             limit: 255
+    t.boolean  "is_bride"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  create_table "guest_replies", force: :cascade do |t|
+    t.integer  "attendee_form_id",   limit: 4
+    t.boolean  "is_attend"
+    t.boolean  "is_need_invitation"
+    t.integer  "guest_group_id",     limit: 4
+    t.integer  "people_count",       limit: 4
+    t.integer  "absent_type",        limit: 4
+    t.string   "absent_reason",      limit: 255
+    t.string   "zip_code",           limit: 255
+    t.string   "city",               limit: 255
+    t.string   "district",           limit: 255
+    t.string   "address",            limit: 255
+    t.text     "answer_json",        limit: 65535
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255
