@@ -9,8 +9,6 @@ class ApplicationController < ActionController::Base
       user = CacheManager.get_current_user(login_key)
       cookies[:login_key] = {:value => login_key, :expires => 1.day.from_now}
     end
-    logger.formatter.params = params
-    logger.formatter.user_id = (user ? user.id : nil)
     return user
   end
 end
