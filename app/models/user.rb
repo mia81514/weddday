@@ -15,4 +15,12 @@ class User < ActiveRecord::Base
       # user.photo = auth.info.image
     end
   end
+
+  def set_sign_in!(info)
+    info[:last_sign_in_at] = self.current_sign_in_at
+    info[:current_sign_in_at] = Time.now
+    info[:sign_in_count] = self.sign_in_count+1
+    info[:last_sign_in_ip] = self.current_sign_in_ip
+    self.update_attributes!(info)
+  end
 end

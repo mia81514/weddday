@@ -17,4 +17,8 @@ class ApplicationController < ActionController::Base
   def nothing
     render(:nothing=>true)
   end
+
+  def redirect_to_root
+    redirect_to root_path
+  end
 end
