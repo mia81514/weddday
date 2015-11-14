@@ -1,7 +1,7 @@
 class CreateGuestReplies < ActiveRecord::Migration
   def change
     create_table :guest_replies do |t|
-      t.integer :attendee_form_id
+      t.integer :questionnaire_id
       t.string  :name
       t.string  :phone
       t.boolean :is_attend
@@ -19,8 +19,8 @@ class CreateGuestReplies < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index(:guest_replies, [ :attendee_form_id, :is_attend ])
-    add_index(:guest_replies, [ :attendee_form_id, :is_need_invitation ])
-    add_index(:guest_replies, [ :attendee_form_id, :guest_group_id ])
+    add_index(:guest_replies, [ :questionnaire_id, :is_attend ])
+    add_index(:guest_replies, [ :questionnaire_id, :is_need_invitation ])
+    add_index(:guest_replies, [ :questionnaire_id, :guest_group_id ])
   end
 end

@@ -11,36 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151111152627) do
+ActiveRecord::Schema.define(version: 20151114020038) do
 
-  create_table "attendee_form_questions", force: :cascade do |t|
-    t.integer  "attendee_form_id", limit: 4
-    t.integer  "q_type",           limit: 4
-    t.string   "title",            limit: 255
-    t.text     "selections",       limit: 65535
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-  end
-
-  add_index "attendee_form_questions", ["attendee_form_id", "q_type"], name: "index_attendee_form_questions_on_attendee_form_id_and_q_type", using: :btree
-
-  create_table "attendee_forms", force: :cascade do |t|
+  create_table "events", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
-    t.string   "cowork_code",  limit: 255
-    t.string   "title",        limit: 255
+    t.integer  "type_id",      limit: 4
+    t.string   "name",         limit: 255
+    t.text     "desc",         limit: 65535
+    t.boolean  "has_location",               default: false
+    t.string   "cover",        limit: 255
     t.string   "city",         limit: 255
     t.string   "district",     limit: 255
     t.string   "address",      limit: 255
     t.string   "place_name",   limit: 255
-    t.datetime "wedding_date"
-    t.datetime "fill_start"
-    t.datetime "fill_end"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "holding_date"
+    t.datetime "date_start"
+    t.datetime "date_end"
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
+  add_index "events", ["user_id", "city"], name: "index_events_on_user_id_and_city", using: :btree
+  add_index "events", ["user_id", "date_end"], name: "index_events_on_user_id_and_date_end", using: :btree
+  add_index "events", ["user_id", "date_start"], name: "index_events_on_user_id_and_date_start", using: :btree
+  add_index "events", ["user_id", "type_id"], name: "index_events_on_user_id_and_type_id", using: :btree
+
   create_table "guest_groups", force: :cascade do |t|
-    t.integer  "attendee_form_id", limit: 4
+    t.integer  "questionnaire_id", limit: 4
     t.string   "name",             limit: 255
     t.boolean  "is_bride"
     t.datetime "created_at",                   null: false
@@ -48,7 +45,7 @@ ActiveRecord::Schema.define(version: 20151111152627) do
   end
 
   create_table "guest_replies", force: :cascade do |t|
-    t.integer  "attendee_form_id",   limit: 4
+    t.integer  "questionnaire_id",   limit: 4
     t.string   "name",               limit: 255
     t.string   "phone",              limit: 255
     t.boolean  "is_attend"
@@ -66,9 +63,31 @@ ActiveRecord::Schema.define(version: 20151111152627) do
     t.datetime "updated_at",                       null: false
   end
 
-  add_index "guest_replies", ["attendee_form_id", "guest_group_id"], name: "index_guest_replies_on_attendee_form_id_and_guest_group_id", using: :btree
-  add_index "guest_replies", ["attendee_form_id", "is_attend"], name: "index_guest_replies_on_attendee_form_id_and_is_attend", using: :btree
-  add_index "guest_replies", ["attendee_form_id", "is_need_invitation"], name: "index_guest_replies_on_attendee_form_id_and_is_need_invitation", using: :btree
+  add_index "guest_replies", ["questionnaire_id", "guest_group_id"], name: "index_guest_replies_on_questionnaire_id_and_guest_group_id", using: :btree
+  add_index "guest_replies", ["questionnaire_id", "is_attend"], name: "index_guest_replies_on_questionnaire_id_and_is_attend", using: :btree
+  add_index "guest_replies", ["questionnaire_id", "is_need_invitation"], name: "index_guest_replies_on_questionnaire_id_and_is_need_invitation", using: :btree
+
+  create_table "questionnaire_questions", force: :cascade do |t|
+    t.integer  "questionnaire_id", limit: 4
+    t.integer  "q_type",           limit: 4
+    t.string   "title",            limit: 255
+    t.text     "selections",       limit: 65535
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "questionnaire_questions", ["questionnaire_id", "q_type"], name: "index_questionnaire_questions_on_questionnaire_id_and_q_type", using: :btree
+
+  create_table "questionnaires", force: :cascade do |t|
+    t.integer  "event_id",    limit: 4
+    t.integer  "type_id",     limit: 4
+    t.string   "name",        limit: 255
+    t.text     "desc",        limit: 65535
+    t.string   "cover",       limit: 255
+    t.string   "cowork_code", limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255
