@@ -1,3 +1,4 @@
+require "bcrypt"
 class User < ActiveRecord::Base
   resourcify
   rolify
@@ -14,5 +15,18 @@ class User < ActiveRecord::Base
       user.name  = auth.info.name
       # user.photo = auth.info.image
     end
+  end
+
+  def set_sign_in!(info)
+    info[:last_sign_in_at] = self.current_sign_in_at
+    info[:current_sign_in_at] = Time.now
+    info[:sign_in_count] = self.sign_in_count+1
+    info[:last_sign_in_ip] = self.current_sign_in_ip
+    self.update_attributes!(info)
+  end
+
+  def check_password?(pwd)
+    encrypted_pwd = BCrypt::Password.new(self.encrypted_password)
+    return pwd == encrypted_pwd
   end
 end
