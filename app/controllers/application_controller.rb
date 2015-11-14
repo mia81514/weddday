@@ -11,4 +11,10 @@ class ApplicationController < ActionController::Base
     end
     return user
   end
+#############
+# render
+#############
+  def nothing
+    render(:nothing=>true)
+  end
 end
