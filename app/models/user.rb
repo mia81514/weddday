@@ -26,6 +26,6 @@ class User < ActiveRecord::Base
   end
 
   def check_password?(pwd)
-    return pwd == BCrypt::Password.new(self.encrypted_password)
+    return BCrypt::Password.new(self.encrypted_password).is_password?(pwd)
   end
 end
