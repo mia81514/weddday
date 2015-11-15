@@ -11,7 +11,6 @@ class HomeController < ApplicationController
     return nothing if not u.check_password?(pwd)
     #TODO timezone
     u.set_sign_in!({:current_sign_in_ip => request.remote_ip})
-
     cache_user(u.id)
     return redirect_to_root
   end
