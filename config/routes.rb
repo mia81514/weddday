@@ -67,6 +67,7 @@ Rails.application.routes.draw do
         match '/:action', :via => :all
         match '/table_arranges/:event_id' => 'hosts#table_arranges', :via => :all
         match '/create_table_arrange/:event_id' => 'hosts#create_table_arrange', :via => :all
+        match '/event_details/:event_id' => 'hosts#event_details', :via => :all
       end
     end
   end

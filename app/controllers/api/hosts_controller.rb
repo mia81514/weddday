@@ -4,7 +4,7 @@
 class Api::HostsController < Api::BaseController
 
   before_filter :host_auth
-  before_filter :should_has_event, :only => [:table_arranges, :create_table_arrange]
+  before_filter :should_has_event, :only => [:table_arranges, :create_table_arrange, :event_details]
 
   def table_arranges
     success((@event.table_arranges rescue []).as_json)
@@ -20,6 +20,18 @@ class Api::HostsController < Api::BaseController
     success()
   end
 
+
+  #===============
+  # 活動相關
+  #===============
+  def events
+    success(current_api_user.events.includes(:questionnaires).as_json(:view=>true))
+  end
+
+  def event_details
+    success(@event.as_json(:include => Event.include_without_q_for_json))
+  end
+
   private
     def host_auth
       #有商家權限就導掉
@@ -28,7 +40,7 @@ class Api::HostsController < Api::BaseController
 
     def should_has_event
       event_id = params[:event_id].to_i
-      @event   = current_api_user.events.select{|e| e.id == event_id}.first
+      @event   = current_api_user.events.includes(Event.includes_without_q).select{|e| e.id == event_id}.first
       return error("SHOULD_HAS_EVENT_001","EVENT_NOT_FOUND") if @event.nil?
     end
 end
