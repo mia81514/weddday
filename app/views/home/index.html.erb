@@ -1,9 +1,18 @@
 <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
 
 <br><br><br>
+Sign In
 <form method="post" action="/home/sign_in">
-  <input name="authenticity_token" type="hidden" value="<%=form_authenticity_token%>" />
-  <input name="email"><br><br>
-  <input name="password"><br><br>
+  <input name="authenticity_token" type="hidden" value="<%=form_authenticity_token%>"/>
+  Emailer<input name="email"><br><br>
+  Password<input name="password"><br><br>
+  <button type="submit">Submit</button>
+</form>
+
+Sign up
+<form method="post" action="/home/sign_up">
+  <input name="authenticity_token" type="hidden" value="<%=form_authenticity_token%>"/>
+  Email<input name="email"><br><br>
+  Password<input name="password"><br><br>
   <button type="submit">Submit</button>
 </form>

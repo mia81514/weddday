@@ -7,12 +7,17 @@ class HomeController < ApplicationController
   def sign_in
     email = params[:email].to_s
     return nothing if (u = User.where(:email => email).first).nil?
-    pwd = params[:password].to_s
-    return nothing if not u.check_password?(pwd)
+    return nothing if not u.check_password?(params[:password].to_s)
     #TODO timezone
     u.set_sign_in!({:current_sign_in_ip => request.remote_ip})
     cache_user(u.id)
     return redirect_to_root
+  end
+
+  def sign_up
+    err_msgs = User.set_sign_up!(params[:email].to_s, params[:password].to_s)
+    return render_json_failed(err_msgs) if err_msgs.any?
+    return render_json_success
   end
 
 private
