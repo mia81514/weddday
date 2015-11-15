@@ -19,10 +19,6 @@ class Api::BaseController < ApplicationController
     error("GENERAL001", "User Not Found")
   end
 
-  def gc_not_found
-    error("GENERAL002", "Gc Not Found")
-  end
-
   def wrong_params
     error("GENERAL003", "Incorrect Parameters")
   end
