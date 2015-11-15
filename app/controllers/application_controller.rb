@@ -23,11 +23,15 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  def error(data)
-    render(:status => "error", data)
+  def render_json_failed(data)
+    render :json => {:status => 'failed', :data => data}
   end
 
-  def error_text(msg'')
+  def render_json_success(data='')
+    render :json => {:status => 'success', :data => data}
+  end
+
+  def error_text(msg='')
     render(:text=>{:error=>msg}.to_json)
   end
 end
