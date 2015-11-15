@@ -23,6 +23,7 @@ class Api::HostsController < Api::BaseController
   private
     def host_auth
       #有商家權限就導掉
+      return error("HOST_AUTH_001","YOU ARE MERCHANT") if current_api_user.has_role? :merchant
     end
 
     def should_has_event
