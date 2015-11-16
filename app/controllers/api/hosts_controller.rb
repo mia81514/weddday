@@ -28,6 +28,14 @@ class Api::HostsController < Api::BaseController
     success(current_api_user.events.includes(:questionnaires).as_json(:view=>true))
   end
 
+  def create_event
+    e = Event.get_valid_params(params[:e])
+    return error("CREATE_EVENT_001","PARAMS_INVALID") if e.nil?
+    event = current_api_user.events.new
+    event.update_attributes(e)
+    success()
+  end
+
   def event_details
     success(@event.as_json(:include => Event.include_without_q_for_json))
   end
