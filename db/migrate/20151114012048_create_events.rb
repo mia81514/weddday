@@ -12,16 +12,12 @@ class CreateEvents < ActiveRecord::Migration
       t.string    :address
       t.string    :place_name
       t.datetime  :holding_date
-      t.datetime  :date_start
-      t.datetime  :date_end
 
       t.timestamps null: false
     end
 
     add_index(:events, [:user_id, :type_id])
     add_index(:events, [:user_id, :city])
-    add_index(:events, [:user_id, :date_end])
-    add_index(:events, [:user_id, :date_start])
   end
 
 end

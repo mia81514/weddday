@@ -35,6 +35,15 @@ class Api::HostsController < Api::BaseController
     event.update_attributes(e)
     success()
   end
+  def update_event
+    e = Event.get_valid_params(params[:e])
+    return error("UPDATE_EVENT_001","PARAMS_INVALID") if e.nil?
+    event = Event.find(e[:id]) rescue nil
+    return error("UPDATE_EVENT_002","EVENT_NOT_FOUND") if event.nil?
+    return error("UPDATE_EVENT_003","NOT_UR_EVENT") if !event.is_mine(current_api_user.id)
+    event.update_attributes(e)
+    success()
+  end
 
   def event_details
     success(@event.as_json(:include => Event.include_without_q_for_json))

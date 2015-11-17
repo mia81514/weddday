@@ -1,6 +1,12 @@
 class HostsController < ApplicationController
 
-  def table_arranges
+  layout 'hosts'
+
+  def index
+
+  end
+
+  def test_events
 
   end
 end

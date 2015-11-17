@@ -71,5 +71,6 @@ Rails.application.routes.draw do
       end
     end
   end
+  match ':controller(/:action(/:id(.:format)))', :via => :all
   root :to => 'welcome#index'
 end

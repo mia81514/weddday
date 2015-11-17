@@ -7,8 +7,13 @@ class CreateQuestionnaires < ActiveRecord::Migration
       t.text    :desc
       t.string  :cover
       t.string  :cowork_code #協作代碼:日後可以共同編輯參加表單
+      t.datetime  :date_start
+      t.datetime  :date_end
 
       t.timestamps null: false
     end
+
+    add_index(:questionnaires, [:event_id, :date_end])
+    add_index(:questionnaires, [:event_id, :date_start])
   end
 end
