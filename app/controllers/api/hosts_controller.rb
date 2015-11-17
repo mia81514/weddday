@@ -15,7 +15,8 @@ class Api::HostsController < Api::BaseController
     return error("CREATE_TABLE_ARRANGE_001","TABLE_INFO_EMPTY") if params[:table_info].to_s == ""
     table_info_json = JSON.parse(params[:table_info].to_s) rescue nil
     return error("CREATE_TABLE_ARRANGE_001","INCORRECT_TABLE_INFO_JSON") if table_info_json.nil?
-    table_arrange = @event.table_arrange.new({:name => params[:name].to_s, :table_info=>table_info_json})
+    valid_params  = TableArrange.get_valid_params({:name => params[:name].to_s, :table_info=>table_info_json})
+    table_arrange = @event.table_arrange.new(valid_params)
     table_arrange.save
     success()
   end

@@ -39,6 +39,6 @@ class Questionnaire < ActiveRecord::Base
     return nil if date_end > date_start
     p[:date_start] = date_start
     p[:date_end]   = date_end
-    return p
+    p.permit(:name, :type_id, :date_start, :date_end, :cover, :desc)
   end
 end
