@@ -51,3 +51,8 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'settingslogic'
 gem 'rolify'
+
+# use react
+gem "react_on_rails"
+gem "therubyracer"
+gem 'bootstrap-sass'
