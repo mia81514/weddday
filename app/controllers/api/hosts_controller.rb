@@ -36,6 +36,7 @@ class Api::HostsController < Api::BaseController
     event.update_attributes(e)
     success()
   end
+
   def update_event
     e = Event.get_valid_params(params[:e])
     return error("UPDATE_EVENT_001","PARAMS_INVALID") if e.nil?

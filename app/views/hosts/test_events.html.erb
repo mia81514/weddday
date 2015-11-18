@@ -51,5 +51,5 @@
 <p><hr/>
 <h3>Event你會收到的JSON</h3>
 <h3><a href="http://jsoneditoronline.org">附贈JSON Parser，自行複製貼上</a></h3>
-<%=current_user.events.includes(:questionnaires).as_json(:view=>true)%>
+<%=current_user.events.includes(:questionnaires).as_json(:view=>true).to_json%>
 </p>
