@@ -8,6 +8,7 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
+
 # Rails.application.config.assets.precompile += %w( search.js )
 # Add client/assets/ folders to asset pipeline's search path.
 # If you do not want to move existing images and fonts from your Rails app
@@ -18,3 +19,5 @@ Rails.application.config.assets.paths << Rails.root.join("client", "assets", "im
 Rails.application.config.assets.paths << Rails.root.join("client", "assets", "fonts")
 
 Rails.application.config.assets.precompile += %w( generated/server-bundle.js )
+
+Rails.application.config.assets.precompile += %w( hosts.js hosts.css)

@@ -52,6 +52,12 @@ gem 'omniauth-facebook'
 gem 'settingslogic'
 gem 'rolify'
 
+#Upload
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'aws-sdk', '1.53.0'
+gem 'fog-aws'
+
 # use react
 gem "react_on_rails"
 gem "therubyracer"

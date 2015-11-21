@@ -1,0 +1,55 @@
+<p><hr/>
+  <h3>建立活動需要欄位</h3>
+  <%= form_for :e, :url=>'/api/hosts/create_event' do |f| %>
+    <%= f.text_field :id, :type=>'hidden' %>
+    <div>
+      <%= f.label :name, "*名稱" %>
+      <%= f.text_field :name%>
+    </div>
+    <div>
+      <%= f.label :cover, "封面圖" %>
+      <%= f.file_field :cover%>
+    </div>
+    <div>
+      <%= f.label :holding_date, "*舉行日期(YYYY-MM-DD)" %>
+      <%= f.text_field :holding_date%>
+    </div>
+    <div>
+      <%= f.label :has_location, "*是否有地點資訊?" %>
+      <%= f.check_box :has_location%>
+    </div>
+    <section style="background-color: #F7F7F7; padding-left:20px;">
+      <h4>有地點資訊這區才顯示</h4>
+      <h4><a href="http://app.essoduke.org/twzipcode/">可參考套件</a></h4>
+      <div>
+        <%= f.label :city, "城市" %>
+        <%= f.text_field :city%>
+      </div>
+      <div>
+        <%= f.label :district, "行政區" %>
+        <%= f.text_field :district%>
+      </div>
+      <div>
+        <%= f.label :address, "地址" %>
+        <%= f.text_field :address%>
+      </div>
+      <div>
+        <%= f.label :place_name, "地點名稱" %>
+        <%= f.text_field :place_name, :placeholder=>"Neil豪宅"%>
+      </div>
+    </section>
+    <div>
+      <%= f.label :desc, "描述" %>
+      <%= f.text_area :desc, :row=>15, :col=>10%>
+    </div>
+    <button type="submit">GOGOGO</button>
+  <%end%>
+</p>
+
+<br><br><br><br>
+
+<p><hr/>
+<h3>Event你會收到的JSON</h3>
+<h3><a href="http://jsoneditoronline.org">附贈JSON Parser，自行複製貼上</a></h3>
+<%=current_user.events.includes(:questionnaires).as_json(:view=>true).to_json%>
+</p>

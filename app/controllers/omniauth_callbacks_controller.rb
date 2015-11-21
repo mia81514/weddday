@@ -26,8 +26,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       fb_session_key     = split_token[1]
 
       sign_in @user #this will throw if @user is not activated
-      return redirect_to "/merchant"         if current_user.has_role? :merchant
-      return redirect_to "/"
+      return redirect_to "/merchant" if current_user.has_role? :merchant
+      return redirect_to "/hosts"
       # set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
