@@ -7,8 +7,6 @@ Rails.application.routes.draw do
              }
 
   devise_scope :user do
-    get '/home/test_sign_out', :to => 'custom_sessions#destroy', :as => :destroy_user_session
-    post '/home/test_sign_in', :to => 'custom_sessions#create', :as => :create_user_session
     post '/sign_up'  ,:to => 'devise/registrations#new'    ,:as => :new_user_registration
   end
 
@@ -61,7 +59,7 @@ Rails.application.routes.draw do
   #   resources :photos, concerns: :toggleable
 
   # Example resource route within a namespace:
-  match "/api/sign_in" => "custom_sessions#create"
+  match "/api/sign_in" => "api/base#sign_in", :via => :post
   namespace :api do
     resources :hosts do
       collection do
