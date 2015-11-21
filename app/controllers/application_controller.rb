@@ -4,13 +4,22 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  alias_method :devise_current_user, :current_user
+  alias_method :devise_sign_in, :sign_in
+
   def current_user
-    login_key = cookies[:login_key].to_s
-    if login_key.present?
-      user = CacheManager.get_current_user(login_key)
-      cookies[:login_key] = {:value => login_key, :expires => 1.day.from_now}
-    end
+    login_key = cookies[:login_key]
+    return nil if login_key.nil?
+    user = CacheManager.get_current_user(login_key)
+    cookies[:login_key] = {:value => login_key, :expires => 1.day.from_now}
     return user
+  end
+#############
+# override devise
+#############
+  def sign_in(user)
+    cache_user(user.id)
+    devise_sign_in(user)
   end
 #############
 # render
@@ -21,5 +30,11 @@ class ApplicationController < ActionController::Base
 
   def redirect_to_root
     redirect_to root_path
+  end
+
+private
+  def cache_user(user_id)
+    login_key = CacheManager.set_user!(user_id)
+    cookies[:login_key] = {:value => login_key, :expires => 1.day.from_now}
   end
 end
