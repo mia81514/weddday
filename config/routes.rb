@@ -61,11 +61,16 @@ Rails.application.routes.draw do
   #   resources :photos, concerns: :toggleable
 
   # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  namespace :api do
+    resources :hosts do
+      collection do
+        match '/:action', :via => :all
+        match '/table_arranges/:event_id' => 'hosts#table_arranges', :via => :all
+        match '/create_table_arrange/:event_id' => 'hosts#create_table_arrange', :via => :all
+        match '/event_details/:event_id' => 'hosts#event_details', :via => :all
+      end
+    end
+  end
   match ':controller(/:action(/:id(.:format)))', :via => :all
   root :to => 'home#index'
 end
