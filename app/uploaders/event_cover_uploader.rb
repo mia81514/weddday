@@ -2,11 +2,11 @@
 
 class EventCoverUploader < CarrierWave::Uploader::Base
 
-  include CarrierWave::MagicMimeTypes
+  # include CarrierWave::MagicMimeTypes
   include CarrierWave::MiniMagick
 
   #自動判斷正確的type
-  process :set_content_type
+  # process :set_content_type
   # process :resize_to_fit => [1024, 1024]
 
   version :small do
