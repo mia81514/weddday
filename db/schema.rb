@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151114020038) do
+ActiveRecord::Schema.define(version: 20151115034018) do
 
   create_table "events", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
@@ -25,15 +25,11 @@ ActiveRecord::Schema.define(version: 20151114020038) do
     t.string   "address",      limit: 255
     t.string   "place_name",   limit: 255
     t.datetime "holding_date"
-    t.datetime "date_start"
-    t.datetime "date_end"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
   end
 
   add_index "events", ["user_id", "city"], name: "index_events_on_user_id_and_city", using: :btree
-  add_index "events", ["user_id", "date_end"], name: "index_events_on_user_id_and_date_end", using: :btree
-  add_index "events", ["user_id", "date_start"], name: "index_events_on_user_id_and_date_start", using: :btree
   add_index "events", ["user_id", "type_id"], name: "index_events_on_user_id_and_type_id", using: :btree
 
   create_table "guest_groups", force: :cascade do |t|
@@ -85,9 +81,14 @@ ActiveRecord::Schema.define(version: 20151114020038) do
     t.text     "desc",        limit: 65535
     t.string   "cover",       limit: 255
     t.string   "cowork_code", limit: 255
+    t.datetime "date_start"
+    t.datetime "date_end"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
+
+  add_index "questionnaires", ["event_id", "date_end"], name: "index_questionnaires_on_event_id_and_date_end", using: :btree
+  add_index "questionnaires", ["event_id", "date_start"], name: "index_questionnaires_on_event_id_and_date_start", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255
@@ -99,6 +100,14 @@ ActiveRecord::Schema.define(version: 20151114020038) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "table_arranges", force: :cascade do |t|
+    t.integer  "event_id",   limit: 4
+    t.string   "name",       limit: 255
+    t.text     "table_info", limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

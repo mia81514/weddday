@@ -28,4 +28,17 @@ class Questionnaire < ActiveRecord::Base
   def bridegroom_friends_replies
     return guest_replies.includes(:guest_group).select{|reply| not reply.guest_group.is_bride}
   end
+
+  def self.get_valid_params(p)
+    return nil if p[:name].nil? or p[:date_start].nil? or p[:date_end].nil?
+    return nil if p[:name]==""  or p[:date_start]=="" or p[:date_end]==""
+    date_start = p[:date_start].to_datetime rescue nil
+    date_end   = p[:date_end].to_datetime   rescue nil
+    return nil if date_start.nil? or date_end.nil?
+    return nil if date_start.nil? or date_end.nil?
+    return nil if date_end > date_start
+    p[:date_start] = date_start
+    p[:date_end]   = date_end
+    p.permit(:name, :type_id, :date_start, :date_end, :cover, :desc)
+  end
 end

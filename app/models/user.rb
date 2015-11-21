@@ -7,6 +7,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
 
+  #正常使用者的使用限制
+  USER_LIMIT = {
+    :MAX_EVENT                   => 20,
+    :MAX_QUESTION_COUNT          => 15,
+    :MAX_QUESTIONNAIRE_PER_EVENT => 5,
+    :MAX_SELECTION_PER_Q         => 10,
+  }
+
   has_many :events
 
   def self.from_omniauth(auth)
