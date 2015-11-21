@@ -4,9 +4,9 @@ class HomeController < ApplicationController
   def index
   end
 
-  def log_in
+  def test_sign_in
   end
 
-  def log_out
+  def test_sign_out
   end
 end

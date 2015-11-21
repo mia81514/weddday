@@ -3,6 +3,8 @@ class Api::BaseController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :valid_client_auth #, :except => [:sign_in, :sign_up]
 
+  def sign_in
+  end
 
   def valid_client_auth
     return error("Deny!") if current_api_user.nil?
