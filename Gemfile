@@ -51,3 +51,10 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'settingslogic'
 gem 'rolify'
+
+#Upload
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'aws-sdk', '1.53.0'
+gem 'fog-aws'
+gem 'ruby-filemagic'
