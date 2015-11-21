@@ -3,6 +3,8 @@ class Event < ActiveRecord::Base
   has_many :questionnaires
   has_many :table_arranges
 
+  mount_uploader :cover, EventCoverUploader
+
   def self.except_attr_for_view
     return [:city, :district, :address]
   end
