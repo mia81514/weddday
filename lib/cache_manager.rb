@@ -19,6 +19,10 @@ class CacheManager
     return login_key
   end
 
+  def self.del_user!(login_key)
+    cache.delete(login_key)
+  end
+
   def self.gen_login_key
     return SecureRandom.random_bytes(256)
   end

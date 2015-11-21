@@ -11,4 +11,11 @@ class HomeController < ApplicationController
     sign_in(u)
     return redirect_to_root
   end
+
+  def log_out
+    u = current_user
+    return nothing if u.nil?
+    sign_out(u)
+    return redirect_to_root
+  end
 end

@@ -7,3 +7,9 @@
   <input name="password"><br><br>
   <button type="submit">Submit</button>
 </form>
+
+
+<form method="post" action="/home/log_out">
+  <input name="authenticity_token" type="hidden" value="<%=form_authenticity_token%>" />
+  <button type="submit">Submit</button>
+</form>
