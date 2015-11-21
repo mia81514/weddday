@@ -25,4 +25,8 @@ class User < ActiveRecord::Base
       # user.photo = auth.info.image
     end
   end
+
+  def set_locale!(locale)
+    self.locale = locale; self.save
+  end
 end
