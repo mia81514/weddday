@@ -1,0 +1,18 @@
+<%if current_user.nil?%>
+  <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+
+  <br><br><br>
+
+  <form method="post" action="/api/sign_in">
+    <input name="authenticity_token" type="hidden" value="<%=form_authenticity_token%>" />
+    <input name="email"><br><br>
+    <input name="password"><br><br>
+    <button type="submit">Sign In</button>
+  </form>
+
+<%else%>
+  <form method="get" action="/api/sign_out">
+    <input name="authenticity_token" type="hidden" value="<%=form_authenticity_token%>" />
+    <button type="submit">Sign Out</button>
+  </form>
+<%end%>
