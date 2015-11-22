@@ -1,13 +1,13 @@
 class Api::BaseController < ApplicationController
 
   skip_before_filter :verify_authenticity_token
-  before_filter :valid_client_auth #, :except => [:sign_in, :sign_up]
+  before_filter :valid_client_auth , :except => [:do_sign_in, :do_sign_in]
 
-  def sign_in
+  def do_sign_in
     email = params[:email].to_s; pwd = params[:password].to_s
-    return error("SIGN_IN_001", "NO_USER_EXISTS") if not User.exists?(:email => email)
+    return error("SIGN_IN_001", "NO_USER_EXISTS") if (u = User.where(:email => email).first).nil?
     return erorr("SIGN_IN_002", "PASSWORD_INCORRECT") if not u.check_password?(pwd)
-    Devise::sign_in(u)
+    sign_in(u)
     cache_user(u.id)
     success()
   end

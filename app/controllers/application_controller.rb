@@ -12,6 +12,12 @@ class ApplicationController < ActionController::Base
     return user
   end
 
+  def weddday_sign_out
+    sign_out
+    cookies.delete :login_key
+    redirect_to_root
+  end
+
 #############
 # render
 #############
