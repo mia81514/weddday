@@ -5,9 +5,9 @@ class Api::BaseController < ApplicationController
 
   def sign_in
     email = params[:email].to_s; pwd = params[:password].to_s
-    return error("SIGN_IN_001", "NO_USER_EXISTS") if (u = User.where(:email => email).first).nil?
+    return error("SIGN_IN_001", "NO_USER_EXISTS") if not User.exists?(:email => email)
     return erorr("SIGN_IN_002", "PASSWORD_INCORRECT") if not u.check_password?(pwd)
-    sign_in(u)
+    Devise::sign_in(u)
     cache_user(u.id)
     success()
   end

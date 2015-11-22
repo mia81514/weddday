@@ -8,5 +8,8 @@ class HomeController < ApplicationController
   end
 
   def test_sign_out
+    sign_out
+    cookies.delete :login_key
+    redirect_to_root
   end
 end
