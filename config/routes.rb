@@ -7,6 +7,7 @@ Rails.application.routes.draw do
              }
 
   devise_scope :user do
+    get  'sign_in'   ,:to => 'devise/sessions#new'         ,:as => :new_user_session
     post '/sign_up'  ,:to => 'devise/registrations#new'    ,:as => :new_user_registration
   end
 
@@ -65,9 +66,14 @@ Rails.application.routes.draw do
     resources :hosts do
       collection do
         match '/:action', :via => :all
-        match '/table_arranges/:event_id' => 'hosts#table_arranges', :via => :all
-        match '/create_table_arrange/:event_id' => 'hosts#create_table_arrange', :via => :all
-        match '/event_details/:event_id' => 'hosts#event_details', :via => :all
+        match '/event/:event_id'                      => 'hosts#event'                , :via => [:get, :post]
+        #桌次
+        match '/event/:event_id/table_arranges'       => 'hosts#table_arranges'       , :via => [:get, :post]
+        match '/event/:event_id/table_arrange/:ta_id' => 'hosts#table_arranges'       , :via => [:get, :post]
+        match '/event/:event_id/table_arrange/create' => 'hosts#create_table_arrange' , :via => [:post]
+        #問卷
+        match '/event/:event_id/questionnaires'       => 'hosts#questionnaires'       , :via => [:get, :post]
+        match '/event/:event_id/questionnaire/create' => 'hosts#create_questionnaire' , :via => [:post]
       end
     end
   end

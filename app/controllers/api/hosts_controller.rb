@@ -4,10 +4,17 @@
 class Api::HostsController < Api::BaseController
 
   before_filter :host_auth
-  before_filter :should_has_event, :only => [:table_arranges, :create_table_arrange, :event_details]
+  before_filter :should_has_event, :only => [:table_arranges, :create_table_arrange, :event]
 
+  #===============
+  # 桌次安排
+  #===============
   def table_arranges
     success((@event.table_arranges rescue []).as_json)
+  end
+
+  def table_arrange
+
   end
 
   def create_table_arrange
@@ -23,10 +30,29 @@ class Api::HostsController < Api::BaseController
 
 
   #===============
+  # 活動問卷
+  #===============
+  def questionnaires
+
+  end
+
+  def create_questionnaire
+
+  end
+
+
+  #===============
   # 活動相關
   #===============
   def events
-    success(current_api_user.events.includes(:questionnaires).as_json(:view=>true))
+    success(@event.as_json(:include => Event.include_without_q_for_json))
+  end
+
+  def event
+    eid = params[:event_id]
+    event = Event.where(:id=>eid).includes(:questionnaires).first
+    return data_nil if event.nil?
+    success(event)
   end
 
   def create_event

@@ -1,0 +1,69 @@
+<%if @event%>
+  <h2><span style="color: red;">/api/hosts/event/:event_id</span> 可以問到活動資料</h2>
+  <h4>回的JSON</h4>
+  <h4 style="background-color: #CCCCCC; padding:10px;">
+    <%=@event.as_json(:include => Event.include_without_q_for_json).to_json%>
+  </h4>
+  <table style="border: 1px solid #555;">
+    <%if !@event.cover.file.nil?%>
+      <tr><td colspan="2"><img width="300" height="auto" src="<%=@event.cover.url%>"></td></tr>
+    <%end%>
+    <tr><td>活動名稱</td><td><%=@event.name%></td></tr>
+    <tr><td>舉行日期</td><td><%=@event.holding_date.strftime("%F")%></td></tr>
+    <%if @event.has_location%>
+      <tr><td>地點名稱</td><td><%=@event.place_name%></td></tr>
+      <tr><td>地址</td><td><%=@event.full_address%></td></tr>
+    <%else%>
+      <tr><td colspan="2">沒有地點資訊!</td></tr>
+    <%end%>
+    <tr><td>已建立問卷數量</td><td><%=@event.questionnaires.count%></td></tr>
+  </table>
+
+
+  <br><br><br><br>
+
+  <p><hr/>
+  <h2><span style="color: red;">/api/hosts/event/:event_id/questionnaire/create</span> 建立問卷需要欄位</h2>
+  <%= form_for :qnaire, :url=>"/api/hosts/event/#{@event.id}/questionnaire/create" do |f| %>
+    <%= f.text_field :id, :type=>'hidden' %>
+    <table style="border: 1px solid #555;">
+    <tr>
+      <td><%= f.label :name, "*問卷名稱-name" %></td>
+      <td><%= f.text_field :name%></td>
+    </tr>
+    <tr>
+      <td><label>*問卷類型-type_id(1  #出席調查, 2  #投票, 3  #意見收集)</label></td>
+      <td><select name="qnaire[type_id]">
+        <option value="1">出席調查</option>
+        <option value="2">投票</option>
+        <option value="3">意見收集</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td><%= f.label :cover, "封面圖-cover" %>
+      <td><%= f.file_field :cover%></td>
+    </tr>
+    <tr>
+      <td><%= f.label :date_start, "*開始時間-date_start(YYYY-MM-DD HH:MM)" %></td>
+      <td><%= f.text_field :date_start%></td>
+    </tr>
+    <tr>
+      <td><%= f.label :date_end, "*結束時間-date_end(YYYY-MM-DD HH:MM)" %></td>
+      <td><%= f.text_field :date_end%></td>
+    </tr>
+    <tr>
+      <td><%= f.label :desc, "描述-desc" %></td>
+      <td><%= f.text_area :desc, :row=>15, :col=>10%></td>
+    </tr>
+    </table>
+    <button type="submit">GOGOGO</button>
+  <%end%>
+  </p>
+
+  <br><br><br><br>
+
+
+
+<%else%>
+<h3>Event nil</h3>
+<%end%>

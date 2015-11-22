@@ -9,10 +9,14 @@ class Event < ActiveRecord::Base
     return [:city, :district, :address]
   end
 
+  def full_address
+    self.city.to_s + self.district.to_s + self.address.to_s if self.has_location
+  end
+
   def as_json(options={})
     if options.fetch(:view, false)
       hash = super(:except => Event.except_attr_for_view)
-      hash[:full_address] = self.city.to_s + self.district.to_s + self.address.to_s if self.has_location
+      hash[:full_address] = full_address
       return hash
     else
       super(options)
