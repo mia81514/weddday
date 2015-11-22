@@ -8,6 +8,7 @@ class HomeController < ApplicationController
   end
 
   def test_sign_out
-    weddday_sign_out()
+    weddday_sign_out
+    redirect_to_root
   end
 end

@@ -12,6 +12,11 @@ class Api::BaseController < ApplicationController
     success()
   end
 
+  def do_sign_out
+    weddday_sign_out
+    success()
+  end
+
   def valid_client_auth
     return error("Deny!") if current_api_user.nil?
   end

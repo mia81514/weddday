@@ -59,7 +59,8 @@ Rails.application.routes.draw do
   #   resources :photos, concerns: :toggleable
 
   # Example resource route within a namespace:
-  match "/api/sign_in" => "api/base#do_sign_in", :via => :post
+  match "/api/sign_in"  => "api/base#do_sign_in", :via => :post
+  match "/api/sign_out" => "api/base#do_sign_out"  , :via => :all
   namespace :api do
     resources :hosts do
       collection do

@@ -14,8 +14,8 @@ class ApplicationController < ActionController::Base
 
   def weddday_sign_out
     sign_out
-    cookies.delete :login_key
-    redirect_to_root
+    CacheManager.del_user!(cookies[:login_key])
+    cookies.delete(:login_key)
   end
 
 #############
