@@ -8,9 +8,7 @@ Rails.application.routes.draw do
              }
 
   devise_scope :user do
-    get 'sign_out'  ,:to => 'devise/sessions#destroy'     ,:as => :destroy_user_session
-    get '/login'    ,:to => 'devise/sessions#new'         ,:as => :new_user_session
-    get '/sign_up'  ,:to => 'devise/registrations#new'    ,:as => :new_user_registration
+    post '/sign_up'  ,:to => 'devise/registrations#new'    ,:as => :new_user_registration
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -62,6 +60,8 @@ Rails.application.routes.draw do
   #   resources :photos, concerns: :toggleable
 
   # Example resource route within a namespace:
+  match "/api/sign_in"  => "api/base#do_sign_in", :via => :post
+  match "/api/sign_out" => "api/base#do_sign_out"  , :via => :all
   namespace :api do
     resources :hosts do
       collection do
@@ -73,5 +73,5 @@ Rails.application.routes.draw do
     end
   end
   match ':controller(/:action(/:id(.:format)))', :via => :all
-  root :to => 'welcome#index'
+  root :to => 'home#index'
 end
