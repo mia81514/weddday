@@ -8,6 +8,11 @@ class Questionnaire < ActiveRecord::Base
   has_many :guest_replies
   has_many :guest_groups
 
+  #吐json時會用到的include(不包含問卷內問題)
+  def self.include_for_json
+    return {:questionnaire_questions=>{}}
+  end
+
   def attendee_count
     return guest_replies.where(:is_attend=>true).count if self.type_id == TYPE_ATTENDEE
     return 0
@@ -30,8 +35,9 @@ class Questionnaire < ActiveRecord::Base
   end
 
   def self.get_valid_params(p)
-    return nil if p[:name].nil? or p[:date_start].nil? or p[:date_end].nil?
-    return nil if p[:name]==""  or p[:date_start]=="" or p[:date_end]==""
+    return nil if p[:name].nil? or p[:date_start].nil? or p[:date_end].nil? or p[:type_id].nil?
+    return nil if p[:name]==""  or p[:date_start]=="" or p[:date_end]=="" or p[:type_id]==""
+    return nil if
     date_start = p[:date_start].to_datetime rescue nil
     date_end   = p[:date_end].to_datetime   rescue nil
     return nil if date_start.nil? or date_end.nil?

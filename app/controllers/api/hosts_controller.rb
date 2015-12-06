@@ -4,7 +4,10 @@
 class Api::HostsController < Api::BaseController
 
   before_filter :host_auth
-  before_filter :should_has_event, :only => [:table_arranges, :create_table_arrange, :event]
+  before_filter :should_has_event, :only => [
+                                              :table_arranges, :create_table_arrange, :event,
+                                              :questionnaires, :create_questionnaire
+                                            ]
 
   #===============
   # 桌次安排
@@ -33,11 +36,19 @@ class Api::HostsController < Api::BaseController
   # 活動問卷
   #===============
   def questionnaires
-
+    success(@event.questionnaires.includes(:questionnaire_questions).as_json(Questionnaire.include_for_json))
   end
 
   def create_questionnaire
+    qnaire   = Questionnaire.get_valid_params(params[:qnaire])
+    return error("CREATE_QNAIRE_001","PARAMS_INVALID") if qnaire.nil?
+    questionnaire = @event.questionnaires.new
+    questionnaire.update_attributes(qnaire)
+    if not params[:questions].nil?
+      questions = JSON.parse(params[:questions].to_s)
 
+    end
+    success()
   end
 
 

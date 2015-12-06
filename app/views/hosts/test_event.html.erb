@@ -26,7 +26,7 @@
   <h2><span style="color: red;">/api/hosts/event/:event_id/questionnaire/create</span> 建立問卷需要欄位</h2>
   <%= form_for :qnaire, :url=>"/api/hosts/event/#{@event.id}/questionnaire/create" do |f| %>
     <%= f.text_field :id, :type=>'hidden' %>
-    <table style="border: 1px solid #555;">
+    <table style="border: 1px solid #555;width: 50%;">
     <tr>
       <td><%= f.label :name, "*問卷名稱-name" %></td>
       <td><%= f.text_field :name%></td>
@@ -34,9 +34,9 @@
     <tr>
       <td><label>*問卷類型-type_id(1  #出席調查, 2  #投票, 3  #意見收集)</label></td>
       <td><select name="qnaire[type_id]">
+        <option value="3">意見收集</option>
         <option value="1">出席調查</option>
         <option value="2">投票</option>
-        <option value="3">意見收集</option>
       </select></td>
     </tr>
     <tr>
@@ -55,6 +55,91 @@
       <td><%= f.label :desc, "描述-desc" %></td>
       <td><%= f.text_area :desc, :row=>15, :col=>10%></td>
     </tr>
+    <div>
+      <table style="background-color: #f0f0f0; border: 1px solid green; width: 50%;">
+      <tr><td colspan="2"><h3>問卷內的題目參數明稱--questions</h3><hr></td></tr>
+      <tr>
+        <td colspan="2"><label style="color: #002EBE;">問題範例1(文字輸入題)</label>
+          <b>JSON 格式範例</b>
+          <p style="background-color: #AAA">
+            {"id":1,"questionnaire_id":1,"q_type":1,"title":"請問你會開什麼車來？","selections":null,"created_at":"2015-12-31 00:00:00","updated_at":"2015-12-31 00:00:00"}
+          </p></td>
+      </tr>
+      <tr>
+        <td><label>題目類型</label></td>
+        <td>
+          <select>
+            <option value="1">文字輸入</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>問題</label></td>
+        <td><input type="text" placeholder="請問你會開什麼車來？"><hr></td>
+      </tr>
+
+
+      <tr>
+        <td colspan="2"><label style="color: #002EBE;">問題範例2(單選題)</label>
+          <b>JSON 格式範例</b>
+          <p style="background-color: #AAA">
+            {"id":1,"questionnaire_id":1,"q_type":2,"title":"請問你想包多少?","selections":[{"order":1,"text":"$300,000"},{"order":2,"text":"$30,000"},{"order":3,"text":"$3,000"},{"order":4,"text":"$300"}],"created_at":"2015-12-31 00:00:00","updated_at":"2015-12-31 00:00:00"}
+          </p></td>
+      </tr>
+      <tr>
+        <td><label>題目類型</label></td>
+        <td>
+          <select>
+            <option value="2">單選</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>問題</label></td>
+        <td><input type="text" placeholder="請問你想包多少?"></td>
+      </tr>
+      <tr>
+        <td><label>選項</label></td>
+        <td>
+          <input type="radio" name="test_single" checked>$300,000<br>
+          <input type="radio" name="test_single">$30,000<br>
+          <input type="radio" name="test_single">$3,000<br>
+          <input type="radio" name="test_single">$300<br>
+          <input type="button" value="+新增選項"><hr>
+        </td>
+      </tr>
+
+        <tr>
+          <td colspan="2"><label style="color: #002EBE;">問題範例3(多選題)</label>
+            <b>JSON 格式範例</b>
+            <p style="background-color: #AAA">
+              {"id":1,"questionnaire_id":1,"q_type":3,"title":"請問你會送什麼?","selections":[{"order":1,"text":"有烤箱的流理台"},{"order":2,"text":"SONY 80吋電視"},{"order":3,"text":"BMW X6"},{"order":4,"text":"TOYOTA Yaris"}],"created_at":"2015-12-31 00:00:00","updated_at":"2015-12-31 00:00:00"}
+            </p></td>
+        </tr>
+        <tr>
+          <td><label>題目類型</label></td>
+          <td>
+            <select>
+              <option value="3">多選</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label>問題</label></td>
+          <td><input type="text" placeholder="請問你會送什麼?"></td>
+        </tr>
+        <tr>
+          <td><label>選項</label></td>
+          <td>
+            <input type="checkbox" name="test_single" checked>有烤箱的流理台<br>
+            <input type="checkbox" name="test_single">SONY 80吋電視<br>
+            <input type="checkbox" name="test_single">BMW X6<br>
+            <input type="checkbox" name="test_single">TOYOTA Yaris<br>
+            <input type="button" value="+新增選項">
+          </td>
+        </tr>
+      </table>
+    </div>
     </table>
     <button type="submit">GOGOGO</button>
   <%end%>
