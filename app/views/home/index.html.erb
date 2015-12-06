@@ -11,7 +11,7 @@
   </form>
 
 <%else%>
-  <form method="get" action="/api/sign_out">
+  <form method="post" action="/api/sign_out">
     <input name="authenticity_token" type="hidden" value="<%=form_authenticity_token%>" />
     <button type="submit">Sign Out</button>
   </form>

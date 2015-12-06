@@ -7,8 +7,7 @@ class Api::BaseController < ApplicationController
     email = params[:email].to_s; pwd = params[:password].to_s
     return error("SIGN_IN_001", "NO_USER_EXISTS") if (u = User.where(:email => email).first).nil?
     return erorr("SIGN_IN_002", "PASSWORD_INCORRECT") if not u.check_password?(pwd)
-    sign_in(u)
-    cache_user(u.id)
+    weddday_sign_in(u)
     success()
   end
 
@@ -58,10 +57,5 @@ class Api::BaseController < ApplicationController
 
     def success(info={})
       render :json => {:status=>"success", :data=>info}
-    end
-
-    def cache_user(user_id)
-      login_key = CacheManager.set_user!(user_id)
-      cookies[:login_key] = {:value => login_key, :expires => 1.day.from_now}
     end
 end

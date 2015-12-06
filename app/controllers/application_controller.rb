@@ -18,6 +18,11 @@ class ApplicationController < ActionController::Base
     cookies.delete(:login_key)
   end
 
+  def weddday_sign_in(user)
+    sign_in(user)
+    cache_user(user.id)
+  end
+
 #############
 # render
 #############
@@ -27,5 +32,10 @@ class ApplicationController < ActionController::Base
 
   def redirect_to_root
     redirect_to root_path
+  end
+
+  def cache_user(user_id)
+    login_key = CacheManager.set_user!(user_id)
+    cookies[:login_key] = {:value => login_key, :expires => 1.day.from_now}
   end
 end
