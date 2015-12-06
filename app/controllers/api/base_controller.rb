@@ -17,6 +17,13 @@ class Api::BaseController < ApplicationController
     success()
   end
 
+  def set_locale
+    locale = params[:locale].to_s
+    return error("SET_LOCALE_001", "UNAVAILABLE_LOCALE") if I18n.available_locales.map(&:to_s).exclude?(locale)
+    current_api_user.set_locale!(locale)
+    return success()
+  end
+
   def valid_client_auth
     return error("Deny!") if current_api_user.nil?
   end
