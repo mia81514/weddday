@@ -19,5 +19,4 @@ class CustomSessionsController < Devise::SessionsController
   def new
 
   end
-  
 end

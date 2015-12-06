@@ -1,3 +1,4 @@
+require "bcrypt"
 class User < ActiveRecord::Base
   resourcify
   rolify
@@ -28,5 +29,9 @@ class User < ActiveRecord::Base
 
   def set_locale!(locale)
     self.locale = locale; self.save
+  end
+
+  def check_password?(pwd)
+    return BCrypt::Password.new(self.encrypted_password).is_password?(pwd)
   end
 end
