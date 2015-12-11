@@ -1,19 +1,5 @@
-<%if current_user.nil?%>
-  <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %><br>
-  <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
-
-  <br><br><br>
-
-  <form method="post" action="/api/sign_in">
-    <input name="authenticity_token" type="hidden" value="<%=form_authenticity_token%>" />
-    <input name="email"><br><br>
-    <input name="password"><br><br>
-    <button type="submit">Sign In</button>
-  </form>
-
-<%else%>
-  <form method="post" action="/api/sign_out">
-    <input name="authenticity_token" type="hidden" value="<%=form_authenticity_token%>" />
-    <button type="submit">Sign Out</button>
-  </form>
-<%end%>
+<section id="wedddayBanner">
+  <div class="full-cover">
+    <img src="http://www.glades.com.au/images/header/weddings/header_wedding_2013_03.jpg">
+  </div>
+</section>
