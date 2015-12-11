@@ -20,22 +20,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @user.birthday = fb_user_info["birthday"]
       @user.timezone = fb_user_info["timezone"]
       after_success(@user, "facebook", custom_params)
-
-
-      #avatar_url     = User.process_uri(omniauth["info"]["image"])
-      #@user.remote_photo_url = avatar_url
-      # if !User.exists?(:provider => 'facebook', :uid=>@user.uid)
-      #   @user.add_role :merchant if !custom_params.nil? and !custom_params["merchant"].nil?
-      # end
-      # @user.save
-      # session[:fb_token] = omniauth["credentials"]["token"] if omniauth['provider'] == 'facebook'
-      # split_token        = session[:fb_token].split("|")
-      # fb_api_key         = split_token[0]
-      # fb_session_key     = split_token[1]
-      # weddday_sign_in(@user)
-      # return redirect_to "/merchant" if current_user.has_role? :merchant
-      # return redirect_to "/hosts"
-      # set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
       redirect_to "/"
