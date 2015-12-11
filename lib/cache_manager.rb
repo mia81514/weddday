@@ -8,7 +8,7 @@ class CacheManager
 ####################
   def self.get_current_user(key)
     user_id = cache.read(key)
-    return nil if user_id.nil? || (user = User.where(user_id).first).nil?
+    return nil if user_id.nil? || (user = User.find(user_id.to_i) rescue nil).nil?
     self.extend_expiry!(key, user_id)
     return user
   end
