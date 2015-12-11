@@ -5,11 +5,12 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= render :partial => "util/head_bootstrap" %>
 </head>
 <body>
+<%= render :partial => "util/menu_bar"%>
 <h3>Menu
-<a href="/hosts/test_events">活動管理</a>
-<a href="/hosts/test_articles">文章編輯</a>
+
 </h3>
 <%= yield %>
 

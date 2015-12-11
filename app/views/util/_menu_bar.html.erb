@@ -1,0 +1,34 @@
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Weddday</a>
+    </div>
+
+    <%if current_user%>
+      <ul class="nav navbar-nav">
+        <li><a href="/hosts/test_events">活動管理</a></li>
+        <li><a href="/hosts/test_articles">文章編輯</a></li>
+      </ul>
+    <%end%>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <%if current_user%>
+          <li><a href="/api/sign_out">Sign Out</a></li>
+        <%else%>
+          <li><a href="/users/auth/facebook"><img width="25" height="25" src="https://lasierra.edu/fileadmin/images/sfs/icons/facebook.png"></a></li>
+          <li><a href="/users/auth/google_oauth2"><img width="25" height="25" src="http://contractingbusiness.com/site-files/contractingbusiness.com/files/uploads/2014/10/1412733468_circle-google-plus-128.png"></a></li>
+        <%end%>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
