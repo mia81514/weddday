@@ -51,6 +51,10 @@ GEM
     bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
+    bootsy (2.2.0)
+      carrierwave (~> 0.10)
+      mini_magick (~> 4.3)
+      remotipart (~> 1.2)
     builder (3.2.2)
     byebug (8.0.0)
     carrierwave (0.10.0)
@@ -182,6 +186,7 @@ GEM
       execjs (~> 2.5)
       rails (>= 3.2)
     ref (2.0.0)
+    remotipart (1.2.1)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rolify (3.2.0)
@@ -230,6 +235,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk (= 1.53.0)
   bootstrap-sass
+  bootsy
   byebug
   carrierwave
   coffee-rails (~> 4.1.0)

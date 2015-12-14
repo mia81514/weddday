@@ -64,3 +64,6 @@ gem 'fog-aws'
 gem "react_on_rails"
 gem "therubyracer"
 gem 'bootstrap-sass'
+
+# Article System
+gem 'bootsy'
