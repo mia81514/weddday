@@ -66,4 +66,6 @@ gem "therubyracer"
 gem 'bootstrap-sass'
 
 # Article System
-gem 'bootsy'
+gem 'bootsy', '2.2.0'
+gem 'autoprefixer-rails'
+gem "bootstrap_form"

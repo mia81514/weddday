@@ -51,6 +51,7 @@ GEM
     bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
+    bootstrap_form (2.3.0)
     bootsy (2.2.0)
       carrierwave (~> 0.10)
       mini_magick (~> 4.3)
@@ -233,9 +234,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
   aws-sdk (= 1.53.0)
   bootstrap-sass
-  bootsy
+  bootstrap_form
+  bootsy (= 2.2.0)
   byebug
   carrierwave
   coffee-rails (~> 4.1.0)

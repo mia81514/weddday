@@ -1,0 +1,28 @@
+zh-TW:
+  bootsy:
+    action:
+      destroy: 刪除
+      close: 關閉
+      load: 開啟
+      or: 或
+      upload: 上傳圖片
+      submit_upload: 送出
+      enter_image_url: 請輸入網址
+    image_gallery: 圖庫
+    image:
+      s: 圖片
+      p: 圖片
+      size: 大小
+      large: 大
+      medium: 中
+      small: 小
+      original: 原始尺寸
+      new: 新增圖片
+      confirm:
+        destroy: 確定刪除圖片?
+      position:
+        left: 置左
+        right: 置右
+        inline: 置中
+    js:
+      alert_unsaved: 尚未儲存!確定離開此頁面嗎？

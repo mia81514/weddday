@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weddday-Articles</title>
+  <%= javascript_include_tag 'articles/articles'%>
+  <%= stylesheet_link_tag 'articles/articles', media: 'all' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= render :partial => "util/menu_bar"%>
+<%= yield %>
+</body>
+</html>

@@ -20,4 +20,5 @@ Rails.application.config.assets.paths << Rails.root.join("client", "assets", "fo
 
 Rails.application.config.assets.precompile += %w( generated/server-bundle.js )
 
-Rails.application.config.assets.precompile += %w( hosts.js hosts.css)
+Rails.application.config.assets.precompile += %w( hosts/hosts.js hosts/hosts.css)
+Rails.application.config.assets.precompile += %w( articles/articles.css articles/articles.js)
